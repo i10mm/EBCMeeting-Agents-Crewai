@@ -57,6 +57,10 @@ class MeetingPreparationTasks():
         )
 
     def meeting_strategy_task(self, agent, context, objective, nvidia_recommendations):
+        # Add dependencies
+        research_task = self.research_task(None, None, None)  # Placeholder for research task
+        industry_analysis_task = self.industry_analysis_task(None, None, None)  # Placeholder for industry analysis task
+
         return Task(
             description=dedent(f"""\
                 Develop talking points, questions, and strategic angles for the meeting based on the provided context, objective, and NVIDIA solutions recommendations:
@@ -74,10 +78,14 @@ class MeetingPreparationTasks():
             expected_output=dedent("""\
                 A document outlining a comprehensive meeting strategy, including talking points, questions, and strategic angles.
                 """),
-            agent=agent
+            agent=agent,
+            context=[research_task, industry_analysis_task]  # Add dependencies
         )
 
     def summary_and_briefing_task(self, agent, context, objective, research_report, industry_analysis, meeting_strategy):
+        # Add dependencies
+        meeting_strategy_task = self.meeting_strategy_task(None, None, None, None)  # Placeholder for meeting strategy task
+
         return Task(
             description=dedent(f"""\
                 Compile all gathered information into a concise and informative briefing document for the EBC meeting:
@@ -101,5 +109,6 @@ class MeetingPreparationTasks():
             expected_output=dedent("""\
                 A comprehensive briefing document summarizing all findings and recommendations for the EBC meeting.
                 """),
-            agent=agent
+            agent=agent,
+            context=[meeting_strategy_task]  # Add dependencies
         )

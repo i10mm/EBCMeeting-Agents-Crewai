@@ -1,7 +1,7 @@
 from textwrap import dedent
 from crewai import Agent
 
-from src.tools import ExaSearchTool, NvidiaSolutionsTool
+from tools import ExaSearchTool, NvidiaSolutionsTool
 
 class MeetingPreparationAgents():
     def research_agent(self):

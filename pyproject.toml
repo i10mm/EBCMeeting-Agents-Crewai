@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ebcmeeting"
+version = "0.1.0"
+description = "AGI-Agents"
+authors = ["WaseemH <134465813+i10mm@users.noreply.github.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+crewai = "^0.22.5"
+
+[tool.poetry.group.dev.dependencies]
+crewai = "^0.22.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

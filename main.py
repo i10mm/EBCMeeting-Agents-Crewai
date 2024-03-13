@@ -1,10 +1,15 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from crewai import Crew
+from crewai import Crew, Process
 
 from src.tasks import MeetingPreparationTasks
 from src.agents import MeetingPreparationAgents
+
+# Import and create the manager LLM
+from langchain_openai import ChatOpenAI
+
+manager_llm = ChatOpenAI(model_name="gpt-4", temperature=0.7)  # Replace with your preferred LLM
 
 tasks = MeetingPreparationTasks()
 agents = MeetingPreparationAgents()
@@ -29,7 +34,11 @@ nvidia_recommendations = tasks.nvidia_solutions_recommendation_task(nvidia_exper
 meeting_strategy = tasks.meeting_strategy_task(meeting_strategy_agent, context, objective, nvidia_recommendations)
 summary_and_briefing = tasks.summary_and_briefing_task(summary_and_briefing_agent, context, objective, research, industry_analysis, meeting_strategy)
 
-# Create Crew responsible for Copy
+# Set dependencies (optional)
+meeting_strategy.context = [research, industry_analysis]
+summary_and_briefing.context = [research, industry_analysis, meeting_strategy]
+
+# Create Crew with hierarchical process
 crew = Crew(
     agents=[
         researcher_agent,
@@ -44,11 +53,13 @@ crew = Crew(
         nvidia_recommendations,
         meeting_strategy,
         summary_and_briefing
-    ]
+    ],
+    verbose=True,
+    process=Process.hierarchical,
+    manager_llm=manager_llm
 )
 
 report = crew.kickoff()
-
 
 # Print results
 print("\n\n################################################")

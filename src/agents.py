@@ -1,10 +1,23 @@
 from textwrap import dedent
-from crewai import Agent
+from researcher_agent = agents.research_agent()
+emails = researcher_agent.research_emails(participants)
+context = researcher_agent.research_context(participants)
+objective = researcher_agent.research_objective(participants) crewai
+
+# Use a function from the package
+crewai.some_module.some_function() import Agent
 
 # Ensure this import path is correct based on your project structure
 from tools import ExaSearchTool, NvidiaSolutionsTool
 
 class MeetingPreparationAgents:
+    def __init__(self):
+        self.research_agent = self.research_agent()
+        self.industry_analysis_agent = self.industry_analysis_agent()
+        self.nvidia_expert_agent = self.nvidia_expert_agent()
+        self.meeting_strategy_agent = self.meeting_strategy_agent()
+        self.summary_and_briefing_agent = self.summary_and_briefing_agent()
+
     def research_agent(self):
         # Utilizes ExaSearchTool's tools for research purposes
         return Agent(
@@ -31,40 +44,4 @@ class MeetingPreparationAgents:
             verbose=True
         )
 
-    def nvidia_expert_agent(self):
-        # Utilizes NvidiaSolutionsTool for recommending NVIDIA solutions
-        return Agent(
-            role='NVIDIA Solutions Specialist',
-            goal="Identify gaps in the target company's AI implementation and recommend relevant NVIDIA solutions",
-            tools=[NvidiaSolutionsTool.recommend_solutions],  # Specific method for NVIDIA solutions
-            backstory=dedent("""\
-                As an NVIDIA Solutions Specialist, you possess deep knowledge of NVIDIA's AI offerings.
-                You can analyze a company's AI needs and recommend the most suitable NVIDIA solutions
-                to address those needs and enhance their AI capabilities."""),
-            verbose=True
-        )
-
-    def meeting_strategy_agent(self):
-        # Utilizes ExaSearchTool's tools for meeting strategy development
-        return Agent(
-            role='Meeting Strategy Advisor',
-            goal='Develop talking points, questions, and strategic angles for the meeting',
-            tools=ExaSearchTool.tools(),  # Provides a list of methods for strategy development
-            backstory=dedent("""\
-                As a Strategy Advisor, your expertise will guide the development of
-                talking points, insightful questions, and strategic angles
-                to ensure the meeting's objectives are achieved."""),
-            verbose=True
-        )
-
-    def summary_and_briefing_agent(self):
-        # Utilizes ExaSearchTool's tools for compiling briefing documents
-        return Agent(
-            role='Briefing Coordinator',
-            goal='Compile all gathered information into a concise, informative briefing document',
-            tools=ExaSearchTool.tools(),  # Provides a list of methods for document compilation
-            backstory=dedent("""\
-                As the Briefing Coordinator, your role is to consolidate the research,
-                analysis, and strategic insights into a comprehensive briefing document."""),
-            verbose=True
-        )
+    def nvidia_expert_agent(

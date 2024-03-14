@@ -1,56 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<readme>
-  <heading1>Welcome to the EBC Meeting Preparation Report Toolkit!</heading1>
 
-  <paragraph>This toolkit is designed to help you, as a Client Manager for Global System Integrators (GSI), prepare for Executive Briefing Center (EBC) meetings with your clients. Using the CrewAI framework, we can automate the process of gathering information, analyzing industry trends, and generating a comprehensive report that will help your clients understand how NVIDIA AI solutions can benefit their business.</paragraph>
+# Welcome to the EBC Meeting Preparation Report Toolkit!
 
-  <heading2>Agents:</heading2>
-  <bulletlist>
-    <bullet>Research Agent: Gather information about the target company (e.g., Unilever) and its industry.</bullet>
-    <bullet>Industry Analysis Agent: Analyze the target company's industry, focusing on AI adoption and competition.</bullet>
-    <bullet>NVIDIA Expert Agent: Identify gaps in the target company's AI implementation and recommend relevant NVIDIA solutions.</bullet>
-    <bullet>Meeting Strategy Agent: Develop talking points, questions, and strategic angles for the meeting based on the gathered information.</bullet>
-  </bulletlist>
+This toolkit is designed to help you, as a Client Manager for Global System Integrators (GSI), prepare for Executive Briefing Center (EBC) meetings with your clients. Using the CrewAI framework, we can automate the process of gathering information, analyzing industry trends, and generating a comprehensive report that will help your clients understand how NVIDIA AI solutions can benefit their business.
 
-  <heading2>Tasks:</heading2>
-  <bulletlist>
-    <bullet>Research Task: Conduct thorough research on people and companies involved in the meeting.</bullet>
-    <bullet>Industry Analysis Task: Analyze industry trends, challenges, and opportunities related to AI.</bullet>
-    <bullet>NVIDIA Solutions Recommendation Task: Compile all gathered information into a concise and informative briefing document.</bullet>
-    <bullet>Meeting Strategy Task: Develop a document outlining talking points, questions for the client, and strategic angles for the meeting.</bullet>
-  </bulletlist>
+## Agents
 
-  <paragraph>To use this toolkit, simply provide the stock symbol or URL of the target company as input, optionally provide public LinkedIn profile URLs for potential attendees, and the CrewAI framework will take care of the rest. The output will be a comprehensive EBC meeting preparation report that will help your clients understand how NVIDIA AI solutions can benefit their business.</paragraph>
+- Research Agent: Gather information about the target company and its industry.
+- Industry Analysis Agent: Analyze the target company's industry, focusing on AI adoption and competition.
+- NVIDIA Expert Agent: Identify gaps in the target company's AI implementation and recommend relevant NVIDIA solutions.
+- Meeting Strategy Agent: Develop talking points, questions, and strategic angles for the meeting based on the gathered information.
+- Summary and Briefing Agent: Compile all gathered information into a concise and informative briefing document.
 
-  <heading2>CrewAI Workflow:</heading2>
-  <paragraph>CrewAI orchestrates a dynamic workflow where agents collaborate to accomplish tasks efficiently.</paragraph>
-  <paragraph>Let's delve into the step-by-step process:</paragraph>
+## Tasks
 
-  <heading3>1. Crew Assembly:</heading3>
-  <bulletlist>
-    <bullet>Define agents with distinct roles, goals, Backstory and provide required tools.</bullet>
-    <bullet>Specify tasks with clear descriptions, expected outputs, and assigned agents.</bullet>
-    <bullet>Create a crew, choosing either a sequential or hierarchical process.</bullet>
-  </bulletlist>
+- Research Task: Conduct thorough research on people and companies involved in the meeting.
+- Industry Analysis Task: Analyze industry trends, challenges, and opportunities related to AI.
+- NVIDIA Solutions Recommendation Task: Recommend relevant NVIDIA solutions based on the research and industry analysis.
+- Meeting Strategy Task: Develop a document outlining talking points, questions, and strategic angles for the meeting.
+- Summary and Briefing Task: Generate a comprehensive briefing document summarizing all findings and recommendations.
 
-  <heading3>2. Task Execution:</heading3>
-  <bulletlist>
-    <bullet>Sequential Process:
-      <bulletlist>
-        <bullet>Agents execute tasks in the predefined order.</bullet>
-      </bulletlist>
-    </bullet>
-    <bullet>Hierarchical Process:
-      <bulletlist>
-        <bullet>Task Delegation: A manager agent allocates tasks among crew members based on their roles and capabilities.</bullet>
-        <bullet>Result Validation: The manager evaluates outcomes to ensure they meet the required standards.</bullet>
-        <bullet>Efficient Workflow: Emulates corporate structures, providing an organized approach to task management.</bullet>
-      </bulletlist>
-    </bullet>
-  </bulletlist>
+## Usage
 
-  <heading2>Potential CrewAI Implementation:</heading2>
-  <paragraph>The document then goes into detail about a potential CrewAI implementation for automating EBC meeting preparation and generating reports, including agents and roles, tasks, crew and execution, tools, LLMs, and monitoring and feedback.</paragraph>
+To use this toolkit, simply provide the emails of the meeting participants (other than yourself), the context of the meeting, and your objective for the meeting. The CrewAI framework will orchestrate the agents and tasks to generate a comprehensive EBC meeting preparation report.
 
-  <closing>We hope this toolkit will help you prepare for your EBC meetings and showcase the value of NVIDIA AI solutions to your clients. Good luck!</closing>
-</readme>
+```python
+from dotenv import load_dotenv
+load_dotenv()
+
+from crewai import Crew
+
+from src.tasks import MeetingPreparationTasks
+from src.agents import MeetingPreparationAgents
+
+tasks = MeetingPreparationTasks()
+agents = MeetingPreparationAgents()
+
+print("## Welcome to the EBC Meeting Prep Crew")
+print('-------------------------------')
+participants = input("What are the emails for the participants (other than you) in the meeting?\n")
+context = input("What is the context of the meeting?\n")
+objective = input("What is your objective for this meeting?\n")
+
+# Create Agents and Tasks...
+
+report = crew.kickoff()
+
+print("\n\n################################################")
+print("## Here is the result")
+print("################################################\n")
+print(report)
+```
+
+The output will be a comprehensive EBC meeting preparation report that will help your clients understand how NVIDIA AI solutions can benefit their business. The report will include a summary of the target company and its industry, key findings from the research and industry analysis, recommended NVIDIA solutions and their benefits, talking points, questions, and strategic angles for the meeting, and a list of potential questions that the executives from the target company may ask.
+
+## Tools
+
+The toolkit leverages the following tools:
+
+- `ExaSearchTool`: A tool for conducting web searches and retrieving webpage content.
+- `NvidiaSolutionsTool`: A tool for recommending relevant NVIDIA solutions based on the research report and industry analysis.
+
+## Contributing
+
+We welcome contributions to the EBC Meeting Preparation Report Toolkit! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+```
+
